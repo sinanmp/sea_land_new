@@ -17,19 +17,19 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Connect to the database once when the application starts
-async function initialize() {
-  try {
-    await connectDB();
-    console.log("Database connected successfully!");
-  } catch (error) {
-    console.error("Database connection error:", error);
-  }
-}
+// async function initialize() {
+//   try {
+//     await connectDB();
+//     console.log("Database connected successfully!");
+//   } catch (error) {
+//     console.error("Database connection error:", error);
+//   }
+// }
 
 // Initialize the database connection at startup
-initialize().catch(err => {
-  console.error("Initialization error:", err);
-});
+// initialize().catch(err => {
+//   console.error("Initialization error:", err);
+// });
 
 // Health check route
 app.get("/", async (req, res) => {
