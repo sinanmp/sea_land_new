@@ -1,8 +1,10 @@
 import express from "express";
 import cors from "cors";
+import path from "path";
 import 'dotenv/config';
 import router from "./Router.js";
 import connectDB from "./database/connection.js";
+import favicon from 'serve-favicon';
 
 const app = express();
 
@@ -14,6 +16,9 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
+// Serve favicon
+app.use(favicon(path.join(__dirname, 'favicon.ico')));
 
 // Connect to the database
 async function initialize() {
@@ -35,8 +40,7 @@ app.get("/", async (req, res) => {
 // API routes
 app.use('/api', router);
 
-// Start the server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
