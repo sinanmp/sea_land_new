@@ -16,25 +16,29 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// Connect to the database
+// Connect to the database once when the application starts
 async function initialize() {
-  await connectDB();
+  try {
+    await connectDB();
+    console.log("Database connected successfully!");
+  } catch (error) {
+    console.error("Database connection error:", error);
+  }
 }
+
+// Initialize the database connection at startup
+initialize().catch(err => {
+  console.error("Initialization error:", err);
+});
 
 // Health check route
 app.get("/", async (req, res) => {
-  try {
-    await initialize(); // Ensure DB is connected
-    console.log("Received request at / route");
-    res.status(200).json("Hello, working fine");
-  } catch (error) {
-    console.error("Error initializing app:", error);
-    res.status(500).json({ error: "Initialization error" });
-  }
+  console.log("Received request at / route");
+  res.status(200).json("Hello, working fine");
 });
 
 // API routes
 app.use('/api', router);
 
 // Export the handler for Vercel
-export default  ServerlessHttp(app);
+export default ServerlessHttp(app);
