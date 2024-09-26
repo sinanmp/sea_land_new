@@ -4,12 +4,12 @@ import path from "path";
 import 'dotenv/config';
 import router from "./Router.js";
 import connectDB from "./database/connection.js";
-import favicon from 'serve-favicon';
-import { fileURLToPath } from 'url';
+// import favicon from 'serve-favicon';
+// import { fileURLToPath } from 'url';
 
 // Get the directory name
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -25,7 +25,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Serve favicon
-app.use(favicon(path.join(__dirname, 'favicon.ico')));
+// app.use(favicon(path.join(__dirname, 'favicon.ico')));
 
 // Middleware to parse JSON requests
 app.use(express.json());
