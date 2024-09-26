@@ -17,7 +17,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-connectDB();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -26,11 +25,16 @@ app.use((err, req, res, next) => {
     res.status(500).json({ error: 'Something went wrong, please try again later.' });
 });
 
-app.get("/", (req, res) => {
-    console.log("Received request at / route");
-    res.status(200).json({ message: "Hello, working" });
+app.get("/", async (req, res) => {
+    try {
+      await connectDB(); // Wait for the DB connection
+      console.log("Received request at / route");
+      res.status(200).json("Hello, working fine");
+    } catch (error) {
+      res.status(500).json({ error: "Database connection failed" });
+    }
   });
-
+  
 // API routes
 app.use('/api', router);
 
