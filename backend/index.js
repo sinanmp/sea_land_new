@@ -3,7 +3,6 @@ import cors from "cors";
 import 'dotenv/config';
 import router from "./Router.js";
 import connectDB from "./database/connection.js";
-import ServerlessHttp from "serverless-http";
 
 const app = express();
 
@@ -16,29 +15,28 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// Connect to the database once when the application starts
-// async function initialize() {
-//   try {
-//     await connectDB();
-//     console.log("Database connected successfully!");
-//   } catch (error) {
-//     console.error("Database connection error:", error);
-//   }
-// }
-
-// Initialize the database connection at startup
-// initialize().catch(err => {
-//   console.error("Initialization error:", err);
-// });
+// Connect to the database
+async function initialize() {
+  await connectDB();
+}
 
 // Health check route
 app.get("/", async (req, res) => {
-  console.log("Received request at / route");
-  res.status(200).json("Hello, working fine");
+  try {
+    await initialize(); // Ensure DB is connected
+    console.log("Received request at / route");
+    res.status(200).json("Hello, working fine");
+  } catch (error) {
+    console.error("Error initializing app:", error);
+    res.status(500).json({ error: "Initialization error" });
+  }
 });
 
 // API routes
 app.use('/api', router);
 
-// Export the handler for Vercel
-export default ServerlessHttp(app);
+// Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
