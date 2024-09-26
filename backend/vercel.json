@@ -2,6 +2,7 @@
   "version": 2,
   "functions": {
     "index.js": {
+      "runtime": "nodejs16.x", 
       "maxDuration": 100 
     }
   },
