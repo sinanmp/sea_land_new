@@ -2,11 +2,11 @@
   "version": 2,
   "builds": [
     {
-      "src": "index.js", // Adjust this to the entry file of your application
+      "src": "index.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "/index.js" } // Route all requests to index.js
+    { "src": "/(.*)", "dest": "/index.js" } 
   ]
 }
