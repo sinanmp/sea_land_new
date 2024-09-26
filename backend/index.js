@@ -16,13 +16,14 @@ const app = express();
 // CORS options
 const corsOptions = {
   origin: 'https://sealand.vercel.app',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Ensure OPTIONS is included
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
 };
 
-// Middleware
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // Allow preflight requests for all routes
+
 
 // Serve favicon
 // app.use(favicon(path.join(__dirname, 'favicon.ico')));
