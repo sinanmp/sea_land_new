@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-let isConnected = false; // Track the connection status
+let isConnected = false;
 
 async function connectDB() {
   if (isConnected) {
@@ -14,7 +14,10 @@ async function connectDB() {
 
   try {
     mongoose.set("strictQuery", false);
-    const db = await mongoose.connect(process.env.MONGO_URL);
+    const db = await mongoose.connect(process.env.MONGO_URL, {
+      useNewUrlParser: true, // Optional: depending on your version
+      useUnifiedTopology: true // Optional: depending on your version
+    });
     isConnected = db.connections[0].readyState;
     console.log("Database connected successfully!");
   } catch (error) {
