@@ -2,10 +2,8 @@
   "version": 2,
   "functions": {
     "index.js": {
-      "runtime": "nodejs20.x",
-      "config": {
-        "maxDuration": 60 
-      }
+      "maxDuration": 60,
+      "runtime": "nodejs20.x"
     }
   },
   "builds": [
