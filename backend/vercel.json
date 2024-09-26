@@ -5,7 +5,7 @@
       "src": "index.js",
       "use": "@vercel/node",
       "config": {
-        "maxDuration": 30
+        "maxDuration": 30 
       }
     }
   ],
@@ -13,4 +13,3 @@
     { "src": "/(.*)", "dest": "/index.js" }
   ]
 }
- 
