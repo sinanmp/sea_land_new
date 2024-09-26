@@ -14,10 +14,7 @@ async function connectDB() {
 
     try {
         mongoose.set("strictQuery", false);
-        const db = await mongoose.connect(process.env.MONGO_URL, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
+        const db = await mongoose.connect(process.env.MONGO_URL); // No need for deprecated options
         isConnected = db.connections[0].readyState;
         console.log("Database connected successfully!");
     } catch (error) {
