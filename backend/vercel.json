@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "functions": {
-    "api/**/*.js": {
-      "runtime": "nodejs16.x"
+  "builds": [
+    {
+      "src": "index.js", // Adjust this to the entry file of your application
+      "use": "@vercel/node"
     }
-  }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/index.js" } // Route all requests to index.js
+  ]
 }
